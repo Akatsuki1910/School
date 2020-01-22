@@ -34,7 +34,7 @@ public static void main(String[] args ){
 		}
 		
 		String[] combo_text = {"ペン","線","三角","虹"};
-		JComboBox combo = new JComboBox(combo_text);
+		JComboBox<String> combo = new JComboBox<String>(combo_text);
 		combo.setVisible(true);
 		menubar.add(combo);
 		combo.addActionListener(new ComboListener(listener));

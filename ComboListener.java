@@ -7,7 +7,7 @@ public class ComboListener implements ActionListener {
 	private MousePaintListener listener;
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		JComboBox data = (JComboBox)e.getSource();
+		JComboBox<String> data = (JComboBox<String>)e.getSource();
         String b= (String)data.getSelectedItem();
         switch(b) {
         case "線":
