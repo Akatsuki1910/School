@@ -65,6 +65,10 @@ public class MousePaintListener implements MouseInputListener {
 				flg = 0;
 				rainbow = true;
 				break;
+			case "era":
+				flg = 0;
+				g.setColor(new Color(255,255,255));
+				break;
         }
 	}
 	

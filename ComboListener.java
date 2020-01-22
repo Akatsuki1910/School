@@ -10,18 +10,21 @@ public class ComboListener implements ActionListener {
 		JComboBox<String> data = (JComboBox<String>)e.getSource();
         String b= (String)data.getSelectedItem();
         switch(b) {
-        case "線":
-        	listener.setMode("line");
-        	break;
-        case "三角":
-        	listener.setMode("tri");
-        	break;
-        case "ペン":
-        	listener.setMode("sen");
-        	break;
-        case "虹":
-        	listener.setMode("rai");
-        	break;
+			case "線":
+				listener.setMode("line");
+				break;
+			case "三角":
+				listener.setMode("tri");
+				break;
+			case "ペン":
+				listener.setMode("sen");
+				break;
+			case "虹":
+				listener.setMode("rai");
+				break;
+			case "消しゴム":
+				listener.setMode("era");
+				break;
         }
 	}
 	

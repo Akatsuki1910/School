@@ -8,9 +8,16 @@ public static void main(String[] args ){
 		frame.setVisible(true);
 		frame.setLayout(null);
 		frame.setResizable(false);
+		frame.getContentPane().setBackground( Color.RED );
 		Graphics g = frame.getGraphics();
 		MousePaintListener listener = new MousePaintListener(g);
-		
+
+		JPanel panel = new JPanel();
+		panel.setSize(300,300);
+		panel.setBackground(Color.WHITE);
+		frame.add(panel);
+		panel.setVisible(true);
+
 		JMenuBar menubar = new JMenuBar();
 		frame.setJMenuBar(menubar);
 		JMenu menu1 = new JMenu("色");
@@ -33,7 +40,7 @@ public static void main(String[] args ){
 			sizeEvent[i].addActionListener(new PenListener(listener));
 		}
 		
-		String[] combo_text = {"ペン","線","三角","虹"};
+		String[] combo_text = {"ペン","線","三角","虹","消しゴム"};
 		JComboBox<String> combo = new JComboBox<String>(combo_text);
 		combo.setVisible(true);
 		menubar.add(combo);
