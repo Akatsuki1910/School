@@ -9,42 +9,34 @@ public static void main(String[] args ){
 		frame.setLayout(null);
 		frame.setResizable(false);
 		Graphics g = frame.getGraphics();
+		MousePaintListener listener = new MousePaintListener(g);
 		
 		JMenuBar menubar = new JMenuBar();
 		frame.setJMenuBar(menubar);
 		JMenu menu1 = new JMenu("色");
 		menubar.add(menu1);
-        JMenuItem menuitem1 = new JMenuItem("黒");
-        JMenuItem menuitem2 = new JMenuItem("赤");
-        JMenuItem menuitem3 = new JMenuItem("緑");
-        JMenuItem menuitem4 = new JMenuItem("青");
-        menu1.add(menuitem1);
-        menu1.add(menuitem2);
-        menu1.add(menuitem3);
-        menu1.add(menuitem4);
+		String[] color = {"黒","赤","緑","青"};
+		JMenuItem[] colorEvent = new JMenuItem[color.length];
+		for(int i=0;i<color.length;i++) {
+			colorEvent[i] = new JMenuItem(color[i]);
+			menu1.add(colorEvent[i]);
+			colorEvent[i].addActionListener(new ButtonListener(g,listener));
+		}
 		
 		JMenu menu2 = new JMenu("太さ");
 		menubar.add(menu2);
-		JMenuItem pensize1 = new JMenuItem("大");
-		JMenuItem pensize2 = new JMenuItem("中");
-		JMenuItem pensize3 = new JMenuItem("小");
-		menu2.add(pensize1);
-		menu2.add(pensize2);
-		menu2.add(pensize3);
+		String[] size = {"大","中","小"};
+		JMenuItem[] sizeEvent = new JMenuItem[size.length];
+		for(int i=0;i<size.length;i++) {
+			sizeEvent[i] = new JMenuItem(size[i]);
+			menu2.add(sizeEvent[i]);
+			sizeEvent[i].addActionListener(new PenListener(listener));
+		}
 		
-		String[] combo_text = {"ペン","線","三角"};
+		String[] combo_text = {"ペン","線","三角","虹"};
 		JComboBox combo = new JComboBox(combo_text);
 		combo.setVisible(true);
 		menubar.add(combo);
-		
-		MousePaintListener listener = new MousePaintListener(g);
-		menuitem1.addActionListener(new ButtonListener(g,listener));
-        menuitem2.addActionListener(new ButtonListener(g,listener));
-        menuitem3.addActionListener(new ButtonListener(g,listener));
-        menuitem4.addActionListener(new ButtonListener(g,listener));
-        pensize1.addActionListener(new PenListener(listener));
-		pensize2.addActionListener(new PenListener(listener));
-		pensize3.addActionListener(new PenListener(listener));
 		combo.addActionListener(new ComboListener(listener));
 		
 		frame.addMouseListener(listener);

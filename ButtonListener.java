@@ -26,10 +26,11 @@ public class ButtonListener implements ActionListener {
 			g.setColor(new Color(0,0,255));
 			break;
 		}
+		listener.memColor(g.getColor());
 		
 	}
 	
-	public ButtonListener(Graphics g, MousePaintListener listener) {
+	public ButtonListener(Graphics g,MousePaintListener listener) {
 		this.g = g;
 		this.listener = listener;
 	}

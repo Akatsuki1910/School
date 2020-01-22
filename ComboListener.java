@@ -9,13 +9,20 @@ public class ComboListener implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		JComboBox data = (JComboBox)e.getSource();
         String b= (String)data.getSelectedItem();
-        if(b.equals("線")) {
-			listener.setMode("line");
-        }else if(b.equals("三角")) {
+        switch(b) {
+        case "線":
+        	listener.setMode("line");
+        	break;
+        case "三角":
         	listener.setMode("tri");
-        }else if(b.equals("ペン")) {
+        	break;
+        case "ペン":
         	listener.setMode("sen");
-		}
+        	break;
+        case "虹":
+        	listener.setMode("rai");
+        	break;
+        }
 	}
 	
 	public ComboListener(MousePaintListener listener) {

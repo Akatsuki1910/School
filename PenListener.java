@@ -8,12 +8,16 @@ public class PenListener implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		JMenuItem b = (JMenuItem)e.getSource();
-		if(b.getText().equals("大")) {
-        	listener.setSize("dai");
-		}else if(b.getText().equals("中")) {
+		switch(b.getText()) {
+		case "大":
+			listener.setSize("dai");
+			break;
+		case "中":
 			listener.setSize("tyuu");
-		}else if(b.getText().equals("小")) {
+			break;
+		case "小":
 			listener.setSize("syou");
+			break;
 		}
 	}
 	

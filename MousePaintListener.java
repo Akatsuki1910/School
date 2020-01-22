@@ -1,8 +1,11 @@
 import java.awt.BasicStroke;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.*;
 import java.util.Arrays;
+import java.util.Random;
+
 import javax.swing.event.*;
 
 public class MousePaintListener implements MouseInputListener {
@@ -11,6 +14,8 @@ public class MousePaintListener implements MouseInputListener {
 	private int flg = 0;
 	private int[][] point = new int[3][3];
 	private int pensize = 2;
+	private Color memColor = new Color(0,0,0);
+	private boolean rainbow = false;
 	
 	public MousePaintListener(Graphics g) {
 		this.g = g;
@@ -19,8 +24,8 @@ public class MousePaintListener implements MouseInputListener {
         g2.setStroke(bs);
 	}
 	
-	public void setColor() {
-		flg = 0;
+	public void memColor(Color c) {
+		this.memColor = c;
 	}
 	
 	public void setSize(String s) {
@@ -41,6 +46,8 @@ public class MousePaintListener implements MouseInputListener {
 	}
 	
 	public void setMode(String s) {
+		rainbow=false;
+		g.setColor(memColor);
 		for(int i=0;i<point.length;i++){
 			Arrays.fill(point[i], 0);
 		}
@@ -54,6 +61,10 @@ public class MousePaintListener implements MouseInputListener {
 			case "tri":
 				flg = 2;
 				break;
+			case "rai":
+				flg = 0;
+				rainbow = true;
+				break;
         }
 	}
 	
@@ -61,8 +72,11 @@ public class MousePaintListener implements MouseInputListener {
 	public void mouseClicked(MouseEvent e) {
 		switch(flg){
 			case 0:
-				System.out.println(pensize);
 				g.fillOval(e.getX (), e.getY (), pensize, pensize);
+				if(rainbow) {
+					Random r = new Random();
+					g.setColor(new Color(r.nextInt(255),r.nextInt(255),r.nextInt(255)));
+				}
 			case 1:
 				for(int i=0;i<point.length;i++){
 					if(point[i][0] == 0){
@@ -134,6 +148,10 @@ public class MousePaintListener implements MouseInputListener {
 			g.drawLine(point[0][1], point[0][2], point[1][1], point[1][2]);
 			point[0][1] = point[1][1];
 			point[0][2] = point[1][2];
+			if(rainbow) {
+				Random r = new Random();
+				g.setColor(new Color(r.nextInt(255),r.nextInt(255),r.nextInt(255)));
+			}
 		}
 	}
 
