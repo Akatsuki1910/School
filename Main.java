@@ -9,14 +9,15 @@ public static void main(String[] args ){
 		frame.setLayout(null);
 		frame.setResizable(false);
 		frame.getContentPane().setBackground( Color.RED );
-		Graphics g = frame.getGraphics();
-		MousePaintListener listener = new MousePaintListener(g);
 
 		JPanel panel = new JPanel();
 		panel.setSize(300,300);
 		panel.setBackground(Color.WHITE);
 		frame.add(panel);
 		panel.setVisible(true);
+
+		Graphics g = panel.getGraphics();
+		MousePaintListener listener = new MousePaintListener(g);
 
 		JMenuBar menubar = new JMenuBar();
 		frame.setJMenuBar(menubar);
