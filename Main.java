@@ -11,10 +11,10 @@ public static void main(String[] args ){
 		frame.getContentPane().setBackground( Color.RED );
 
 		JPanel panel = new JPanel();
-		panel.setSize(300,300);
+		panel.setLayout(null);
+		panel.setSize(500,500);
 		panel.setBackground(Color.WHITE);
 		frame.add(panel);
-		panel.setVisible(true);
 
 		Graphics g = panel.getGraphics();
 		MousePaintListener listener = new MousePaintListener(g);
@@ -47,9 +47,10 @@ public static void main(String[] args ){
 		menubar.add(combo);
 		combo.addActionListener(new ComboListener(listener));
 		
-		frame.addMouseListener(listener);
-		frame.addMouseMotionListener(listener);
+		panel.addMouseListener(listener);
+		panel.addMouseMotionListener(listener);
 
 		frame.setVisible(true);
+		panel.setVisible(true);
 	}
 }
