@@ -2,6 +2,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.*;
 
 import javax.swing.JMenuItem;
 
@@ -9,6 +10,7 @@ public class ButtonListener implements ActionListener {
 	
 	private Graphics g;
 	private MousePaintListener listener;
+	private JPanel panel;
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		JMenuItem b = (JMenuItem)e.getSource();
@@ -25,12 +27,19 @@ public class ButtonListener implements ActionListener {
 		case "青":
 			g.setColor(new Color(0,0,255));
 			break;
+		default:
+			JColorChooser colorchooser = new JColorChooser();
+			Color color = colorchooser.showDialog(panel,"選択", Color.white);
+			if(color != null){
+				g.setColor(color);
+			}
 		}
 		listener.memColor(g.getColor());
 		
 	}
 	
-	public ButtonListener(Graphics g,MousePaintListener listener) {
+	public ButtonListener(JPanel panel,Graphics g,MousePaintListener listener) {
+		this.panel = panel;
 		this.g = g;
 		this.listener = listener;
 	}

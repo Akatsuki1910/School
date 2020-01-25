@@ -21,14 +21,15 @@ public static void main(String[] args ){
 
 		JMenuBar menubar = new JMenuBar();
 		frame.setJMenuBar(menubar);
+
 		JMenu menu1 = new JMenu("色");
 		menubar.add(menu1);
-		String[] color = {"黒","赤","緑","青"};
+		String[] color = {"黒","赤","緑","青","他の色"};
 		JMenuItem[] colorEvent = new JMenuItem[color.length];
 		for(int i=0;i<color.length;i++) {
 			colorEvent[i] = new JMenuItem(color[i]);
 			menu1.add(colorEvent[i]);
-			colorEvent[i].addActionListener(new ButtonListener(g,listener));
+			colorEvent[i].addActionListener(new ButtonListener(panel,g,listener));
 		}
 		
 		JMenu menu2 = new JMenu("太さ");
@@ -39,6 +40,16 @@ public static void main(String[] args ){
 			sizeEvent[i] = new JMenuItem(size[i]);
 			menu2.add(sizeEvent[i]);
 			sizeEvent[i].addActionListener(new PenListener(listener));
+		}
+
+		JMenu menu3 = new JMenu("スタンプ");
+		menubar.add(menu3);
+		String[] stamp = {"丸","四角","☆"};
+		JMenuItem[] stampEvent = new JMenuItem[stamp.length];
+		for(int i=0;i<stamp.length;i++) {
+			stampEvent[i] = new JMenuItem(stamp[i]);
+			menu3.add(stampEvent[i]);
+			stampEvent[i].addActionListener(new StampListener(listener));
 		}
 		
 		String[] combo_text = {"ペン","線","三角","虹","消しゴム"};

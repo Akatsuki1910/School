@@ -1,11 +1,7 @@
-import java.awt.BasicStroke;
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
+import java.awt.*;
 import java.awt.event.*;
-import java.util.Arrays;
-import java.util.Random;
-
+import java.awt.geom.*;
+import java.util.*;
 import javax.swing.event.*;
 
 public class MousePaintListener implements MouseInputListener {
@@ -71,9 +67,25 @@ public class MousePaintListener implements MouseInputListener {
 				break;
         }
 	}
-	
+
+	public void setStamp(String s){
+		switch(s) {
+			case "maru":
+				flg = 100;
+				break;
+			case "shikaku":
+				flg = 101;
+				break;
+			case "hoshi":
+				flg = 102;
+				break;
+        }
+	}
+
 	@Override
 	public void mouseClicked(MouseEvent e) {
+		int getx = e.getX();
+		int gety = e.getY();
 		switch(flg){
 			case 0:
 				g.fillOval(e.getX (), e.getY (), pensize, pensize);
@@ -85,8 +97,8 @@ public class MousePaintListener implements MouseInputListener {
 				for(int i=0;i<point.length;i++){
 					if(point[i][0] == 0){
 						point[i][0] = 1;
-						point[i][1] = e.getX();
-						point[i][2] = e.getY();
+						point[i][1] = getx;
+						point[i][2] = gety;
 						break;
 					}
 				}
@@ -101,8 +113,8 @@ public class MousePaintListener implements MouseInputListener {
 				for(int i=0;i<point.length;i++){
 					if(point[i][0] == 0){
 						point[i][0] = 1;
-						point[i][1] = e.getX();
-						point[i][2] = e.getY();
+						point[i][1] = getx;
+						point[i][2] = gety;
 						break;
 					}
 				}
@@ -114,6 +126,27 @@ public class MousePaintListener implements MouseInputListener {
 						Arrays.fill(point[i], 0);
 					}
 				}
+				break;
+			case 100:
+				int circleSize = 30;
+				g.fillOval(getx-circleSize/2, gety-circleSize/2, circleSize, circleSize);
+				break;
+			case 101:
+				int reactSize = 30;
+				g.drawRect(getx-reactSize/2, gety-reactSize/2, reactSize, reactSize);
+				break;
+			case 102:
+				int starSize = 50;
+				Graphics2D g2 = (Graphics2D)g;
+				GeneralPath path = new GeneralPath();
+				path.moveTo( getx-starSize/2, gety-starSize/4 );
+				path.lineTo( getx+starSize/2, gety-starSize/4);
+				path.lineTo( getx-starSize/2, gety+starSize/2 );
+				path.lineTo( getx, gety-starSize*2/3 );
+				path.lineTo( getx+starSize/2, gety+starSize/2 );
+				path.lineTo( getx-starSize/2, gety-starSize/4 );
+				path.closePath();
+				g2.draw(path);
 				break;
 		}
 	}
