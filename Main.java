@@ -11,14 +11,10 @@ public static void main(String[] args ){
 		frame.getContentPane().setBackground( Color.RED );
 
 		JPanel panel = new JPanel();
-		panel.setLayout(null);
 		panel.setSize(500,500);
 		panel.setBackground(Color.WHITE);
 		frame.add(panel);
-
-		Graphics g = panel.getGraphics();
-		MousePaintListener listener = new MousePaintListener(g);
-
+		
 		JMenuBar menubar = new JMenuBar();
 		frame.setJMenuBar(menubar);
 
@@ -29,7 +25,6 @@ public static void main(String[] args ){
 		for(int i=0;i<color.length;i++) {
 			colorEvent[i] = new JMenuItem(color[i]);
 			menu1.add(colorEvent[i]);
-			colorEvent[i].addActionListener(new ButtonListener(panel,g,listener));
 		}
 		
 		JMenu menu2 = new JMenu("太さ");
@@ -39,7 +34,6 @@ public static void main(String[] args ){
 		for(int i=0;i<size.length;i++) {
 			sizeEvent[i] = new JMenuItem(size[i]);
 			menu2.add(sizeEvent[i]);
-			sizeEvent[i].addActionListener(new PenListener(listener));
 		}
 
 		JMenu menu3 = new JMenu("スタンプ");
@@ -49,19 +43,42 @@ public static void main(String[] args ){
 		for(int i=0;i<stamp.length;i++) {
 			stampEvent[i] = new JMenuItem(stamp[i]);
 			menu3.add(stampEvent[i]);
-			stampEvent[i].addActionListener(new StampListener(listener));
 		}
+		
+		JTextField text = new JTextField(10);
+		JTextField textX = new JTextField(2);
+		JTextField textY = new JTextField(2);
+		JButton textbutton = new JButton("Get");
+		menubar.add(text);
+		menubar.add(textX);
+		menubar.add(textY);
+		menubar.add(textbutton);
 		
 		String[] combo_text = {"ペン","線","三角","虹","消しゴム"};
 		JComboBox<String> combo = new JComboBox<String>(combo_text);
 		combo.setVisible(true);
 		menubar.add(combo);
+		
+		frame.setVisible(true);
+
+		Graphics g = panel.getGraphics();
+		MousePaintListener listener = new MousePaintListener(g);
+		
+		
+		for(int i=0;i<color.length;i++) {
+			colorEvent[i].addActionListener(new ButtonListener(panel,g,listener));
+		}
+		for(int i=0;i<size.length;i++) {
+			sizeEvent[i].addActionListener(new PenListener(listener));
+		}
+		for(int i=0;i<stamp.length;i++) {
+			stampEvent[i].addActionListener(new StampListener(listener));
+		}
+		textbutton.addActionListener(new TextListener(text,g,textX,textY));
 		combo.addActionListener(new ComboListener(listener));
 		
 		panel.addMouseListener(listener);
 		panel.addMouseMotionListener(listener);
-
-		frame.setVisible(true);
-		panel.setVisible(true);
+		
 	}
 }

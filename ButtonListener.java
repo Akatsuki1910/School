@@ -4,8 +4,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 
-import javax.swing.JMenuItem;
-
 public class ButtonListener implements ActionListener {
 	
 	private Graphics g;
@@ -28,8 +26,7 @@ public class ButtonListener implements ActionListener {
 			g.setColor(new Color(0,0,255));
 			break;
 		default:
-			JColorChooser colorchooser = new JColorChooser();
-			Color color = colorchooser.showDialog(panel,"選択", Color.white);
+			Color color = JColorChooser.showDialog(panel,"選択", Color.white);
 			if(color != null){
 				g.setColor(color);
 			}
