@@ -38,7 +38,7 @@ public static void main(String[] args ){
 
 		JMenu menu3 = new JMenu("スタンプ");
 		menubar.add(menu3);
-		String[] stamp = {"丸","四角","☆"};
+		String[] stamp = {"丸","四角","☆","初期化"};
 		JMenuItem[] stampEvent = new JMenuItem[stamp.length];
 		for(int i=0;i<stamp.length;i++) {
 			stampEvent[i] = new JMenuItem(stamp[i]);

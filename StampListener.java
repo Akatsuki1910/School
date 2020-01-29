@@ -17,6 +17,9 @@ public class StampListener implements ActionListener {
 		case "☆":
             listener.setStamp("hoshi");
 			break;
+		case "初期化":
+            listener.setStamp("syoki");
+			break;
 		}
 	}
 

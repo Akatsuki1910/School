@@ -79,6 +79,12 @@ public class MousePaintListener implements MouseInputListener {
 			case "hoshi":
 				flg = 102;
 				break;
+			case "syoki":
+				memColor(g.getColor());
+				g.setColor(new Color(255,255,255));
+				g.fillRect(0, 0, 500, 500);
+				g.setColor(memColor);
+				break;
         }
 	}
 
