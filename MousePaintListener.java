@@ -3,6 +3,9 @@ import java.awt.event.*;
 import java.awt.geom.*;
 import java.util.*;
 import javax.swing.event.*;
+import javax.sound.sampled.*;
+import java.io.*;
+import java.net.*;
 
 public class MousePaintListener implements MouseInputListener {
 
@@ -12,7 +15,8 @@ public class MousePaintListener implements MouseInputListener {
 	private int pensize = 2;
 	private Color memColor = new Color(0,0,0);
 	private boolean rainbow = false;
-	
+	private Music m = new Music();
+
 	public MousePaintListener(Graphics g) {
 		this.g = g;
 		Graphics2D g2 = (Graphics2D)g;
@@ -90,6 +94,7 @@ public class MousePaintListener implements MouseInputListener {
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
+		m.start();
 		int getx = e.getX();
 		int gety = e.getY();
 		switch(flg){
@@ -170,6 +175,7 @@ public class MousePaintListener implements MouseInputListener {
 
 	@Override
 	public void mousePressed(MouseEvent e) {
+		m.start();
 		if(flg==0){
 			point[0][1] = e.getX();
 			point[0][2] = e.getY();
@@ -179,7 +185,7 @@ public class MousePaintListener implements MouseInputListener {
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		
+		m.stop();
 
 	}
 
@@ -202,5 +208,4 @@ public class MousePaintListener implements MouseInputListener {
 	public void mouseMoved(MouseEvent e) {
 		
 	}
-
 }
